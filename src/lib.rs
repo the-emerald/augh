@@ -1,23 +1,23 @@
 #[macro_export]
 macro_rules! augh {
     () => {
-        panic!("augh!")
+        panic!()
     };
     ($($arg:tt)+) => {
-        panic!("augh: {}", core::format_args!($($arg)+))
+        panic!($($arg)+)
     };
 }
 
 #[cfg(test)]
 mod tests {
     #[test]
-    #[should_panic(expected = "augh")]
+    #[should_panic(expected = "explicit panic")]
     fn test_augh() {
         augh!()
     }
 
     #[test]
-    #[should_panic(expected = "augh: sple")]
+    #[should_panic(expected = "sple")]
     fn test_augh_with_message() {
         augh!("sple")
     }
