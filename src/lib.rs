@@ -1,24 +1,16 @@
-#[macro_export]
-macro_rules! augh {
-    () => {
-        panic!()
-    };
-    ($($arg:tt)+) => {
-        panic!($($arg)+)
-    };
-}
+pub use std::panic as augh;
 
 #[cfg(test)]
 mod tests {
     #[test]
     #[should_panic(expected = "explicit panic")]
     fn test_augh() {
-        augh!()
+        crate::augh!()
     }
 
     #[test]
     #[should_panic(expected = "sple")]
     fn test_augh_with_message() {
-        augh!("sple")
+        crate::augh!("sple")
     }
 }
